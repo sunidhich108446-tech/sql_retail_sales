@@ -58,7 +58,7 @@ SELECT DISTINCT category FROM RetailSales;
     WHERE sale_date ='2022-11-05';
 -- 2) Retrive   all transactions where the category is clothing and the quantity sold is more than 10 in the month of november 2022?
 	SELECT transactions_id FROM RetailSales 
-    WHERE category = 'Clothing' AND quantity<10 AND MONTH(sale_date)=11 AND YEAR(sale_date)=2022;
+    WHERE category = 'Clothing' AND quantity>10 AND MONTH(sale_date)=11 AND YEAR(sale_date)=2022;
     
 -- 3) Write an sql query to calculate total sales of each category?
     SELECT category,SUM(total_sale) as totalSales FROM RetailSales  
@@ -78,16 +78,16 @@ FROM (
     GROUP BY YEAR(sale_date), MONTH(sale_date)
 ) 
 WHERE rnk = 1;
--- 6) Write and sql query to find the top 5 customers based on the highest total_sale?
+-- 7) Write and sql query to find the top 5 customers based on the highest total_sale?
 SELECT customer_id,SUM(total_sale) as total_sales FROM RetailSales
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5;
--- 7) Write an sql query to find the number of unique customers who purchased item from each category.
+-- 8) Write an sql query to find the number of unique customers who purchased item from each category.
 SELECT category,COUNT(DISTINCT customer_id) as cust_id FROM RetailSales
 GROUP BY 1
 ORDER BY 2 DESC;
--- 8) Write an sql query to create each shift and number of orders (Example Morning<=12 , Afternoon between 12 and 17 , Evening>17)
+-- 9) Write an sql query to create each shift and number of orders (Example Morning<=12 , Afternoon between 12 and 17 , Evening>17)
      With Hourly_sales as
      (
      SELECT *, 
